@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confidentialité — Beaver4x4AI</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #06150d;
+  color: #f5faf6;
+  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  line-height: 1.7;
+}
+header, footer {
+  text-align: center;
+  padding: 25px;
+  border-bottom: 1px solid #254734;
+}
+.brand {
+  color: #31d474;
+  font-size: 26px;
+  font-weight: 800;
+}
+nav a {
+  color: #e5f5ea;
+  margin: 0 9px;
+  text-decoration: none;
+}
+main {
+  max-width: 850px;
+  margin: auto;
+  padding: 40px 20px;
+}
+h1 { font-size: 38px; }
+h2 { color: #39d77b; }
+p, li { color: #c4d6ca; }
+.card {
+  background: #10251a;
+  border: 1px solid #284835;
+  border-radius: 16px;
+  padding: 22px;
+  margin: 18px 0;
+}
+a { color: #56e594; }
+footer { border-top: 1px solid #254734; }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">BEAVER 4X4 AI</div>
+  <p>PRÉPARE · EXPLORE · PARTAGE</p>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="assistance.html">Assistance</a>
+    <a href="confidentialite.html">Confidentialité</a>
+  </nav>
+</header>
+
+<main>
+<h1>Politique de confidentialité</h1>
+<p>Dernière mise à jour : 23 octobre 2026</p>
+
+<p>
+Cette politique explique comment les informations
+personnelles peuvent être utilisées dans Beaver4x4AI.
+</p>
+
+<div class="card">
+<h2>1. Responsable de l'application</h2>
+<p>
+Beaver4x4AI est une application développée
+par Michel Palmer.
+</p>
+<p>Contact : [ADRESSE EMAIL À AJOUTER]</p>
+</div>
+
+<div class="card">
+<h2>2. Données utilisées</h2>
+<p>Selon les fonctionnalités utilisées, l'application
+peut traiter les informations suivantes :</p>
+<ul>
+<li>Informations de profil et identifiant Apple.</li>
+<li>Véhicules, équipements et historique d'entretien.</li>
+<li>Photos et publications ajoutées volontairement.</li>
+<li>Position géographique, avec autorisation.</li>
+<li>Parcours, lieux et contributions communautaires.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>3. Utilisation des informations</h2>
+<p>
+Ces informations servent à faire fonctionner
+le Garage, le Copilote, Trails, le Club
+et les fonctions de synchronisation.
+</p>
+</div>
+
+<div class="card">
+<h2>4. iCloud et CloudKit</h2>
+<p>
+Certaines informations peuvent être stockées
+et synchronisées à l'aide des services
+iCloud et CloudKit d'Apple.
+Les modalités de traitement applicables
+dépendent des services utilisés.
+</p>
+</div>
+
+<div class="card">
+<h2>5. Localisation</h2>
+<p>
+La localisation est utilisée avec l'autorisation
+de l'utilisateur pour les fonctionnalités
+de cartographie et de recherche à proximité.
+Les autorisations peuvent être modifiées
+dans les réglages iOS.
+</p>
+</div>
+
+<div class="card">
+<h2>6. Partage communautaire</h2>
+<p>
+Les informations publiées volontairement
+dans les espaces communautaires peuvent
+être visibles par d'autres utilisateurs.
+Évite de publier des données sensibles.
+</p>
+</div>
+
+<div class="card">
+<h2>7. Conservation et suppression</h2>
+<p>
+Les durées de conservation dépendent
+des catégories de données et des services utilisés.
+Pour demander la suppression de données
+ou exercer tes droits, contacte le responsable
+à l'adresse indiquée ci-dessus.
+</p>
+</div>
+
+<div class="card">
+<h2>8. Droits des utilisateurs</h2>
+<p>
+Conformément à la réglementation applicable,
+les utilisateurs peuvent demander l'accès,
+la rectification ou l'effacement de leurs
+données personnelles, ainsi que l'exercice
+de leurs autres droits applicables.
+</p>
+</div>
+
+<div class="card">
+<h2>9. Modifications</h2>
+<p>
+Cette politique peut évoluer avec les
+fonctionnalités de Beaver4x4AI.
+La date de mise à jour sera indiquée ici.
+</p>
+</div>
+
+</main>
+<footer>
+© 2026 Beaver4x4AI
+<p>
+<a href="index.html">Accueil</a> ·
+<a href="assistance.html">Assistance</a>
+</p>
+</footer>
+</body>
+</html>
