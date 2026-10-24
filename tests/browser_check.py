@@ -8,11 +8,11 @@ with sync_playwright() as p:
   page=browser.new_page(viewport={'width':width,'height':height},is_mobile=width<800,has_touch=True)
   page.on('pageerror',lambda e: errors.append(str(e)))
   page.goto(os.environ.get('BASE_URL', 'http://127.0.0.1:8000'),wait_until='domcontentloaded')
-  page.locator('.intro').wait_for(state='hidden',timeout=8500)
+  page.wait_for_function("document.querySelector('.welcome-hero').classList.contains('is-complete')",timeout=9000)
   assert page.locator('.vehicle').count()==4
   assert page.locator('.landscape-section').count()==8
   assert page.locator('.explore-card-photo').count()==6
-  assert page.locator('main > section').evaluate_all('(nodes)=>nodes.map(n=>n.id)')==['fonctionnalites','application','vehicules','explore','horizon','club','futures-versions','depart']
+  assert page.locator('main > section').evaluate_all('(nodes)=>nodes.map(n=>n.id)')==['accueil','fonctionnalites','application','vehicules','explore','horizon','club','futures-versions','depart']
   assert page.locator('#depart').inner_text().find('Disponible sur l’App Store fin novembre 2026')>=0
   assert page.locator('#depart a').count()==0
   assert page.locator('.explore-scene').count()==0
@@ -48,7 +48,8 @@ with sync_playwright() as p:
   page.close()
  page=browser.new_page(viewport={'width':390,'height':844},reduced_motion='reduce')
  page.goto(os.environ.get('BASE_URL', 'http://127.0.0.1:8000'),wait_until='domcontentloaded')
- assert page.locator('.intro').evaluate('(e)=>getComputedStyle(e).display')=='none'
+ assert page.locator('.intro').count()==0
+ assert page.locator('.welcome-hero').is_visible()
  assert page.locator('.explore-pending').count()==0
  print('Reduced motion: pass; JS errors:',errors)
  assert not errors

@@ -205,3 +205,35 @@
  .departure-scene::after{background:linear-gradient(180deg,transparent 30%,#03100f20 45%,#03100f 64%)}
  .departure-copy{padding:32px 5% 55px;position:relative}
 }
+
+/* Permanent welcome: one fixed, aligned Jeep scene and no replacement backdrop. */
+.welcome-hero{position:relative;isolation:isolate;overflow:hidden;min-height:calc(100svh - 88px);display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:center;padding:35px 5%;gap:0;background:#04100d}
+.welcome-art{min-width:0;position:relative}
+.welcome-hero .ignition-stage{width:100%;aspect-ratio:1152/1024;border-radius:0;flex-shrink:1}
+.welcome-art::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 75%,#04100d),linear-gradient(0deg,#04100d,transparent 12%)}
+.welcome-copy{position:relative;z-index:1;padding:20px 0 25px 28px;min-width:0}
+.welcome-title{font-size:clamp(35px,4.3vw,68px);letter-spacing:-2px;line-height:1.08;margin:0 0 22px;white-space:nowrap}
+.welcome-title span{color:var(--green)}
+.welcome-headline{font-size:clamp(23px,2.7vw,39px);line-height:1.25;color:#f1f9f4;font-weight:800;margin:0 0 26px;letter-spacing:-.7px}
+.welcome-motto{font-size:11px;letter-spacing:2.2px;color:#9de9c1;font-weight:700;margin:0 0 22px}
+.welcome-actions{display:flex;gap:12px;flex-wrap:wrap}.welcome-actions .btn{margin:0;padding:16px 20px}.welcome-actions .outline{margin-left:0}
+.welcome-hero .ignition-rings{filter:drop-shadow(0 0 3px #ffcb87)}
+.welcome-hero .ignition-headlights,.welcome-hero .ignition-roof{mix-blend-mode:screen}
+.welcome-hero.is-awaiting .welcome-copy>*{opacity:0}
+.welcome-hero.is-running .welcome-title{animation:welcomeReveal .75s ease 2.9s both}
+.welcome-hero.is-running .welcome-headline{animation:welcomeReveal .75s ease 3.25s both}
+.welcome-hero.is-running .welcome-motto{animation:welcomeReveal .7s ease 3.65s both}
+.welcome-hero.is-running .welcome-actions{animation:welcomeReveal .7s ease 4.05s both}
+@keyframes welcomeReveal{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+.welcome-hero.is-complete .welcome-copy>*,.welcome-hero.is-complete .ignition-rings,.welcome-hero.is-complete .ignition-headlights,.welcome-hero.is-complete .ignition-roof{animation:none!important;opacity:1;transform:none}
+@media(max-width:760px){
+ .welcome-hero{display:block;padding:0 0 42px;min-height:calc(100svh - 78px)}
+ .welcome-hero .ignition-stage{width:100%}
+ .welcome-art::after{background:linear-gradient(0deg,#04100d,transparent 13%)}
+ .welcome-copy{padding:0 5%;margin-top:-12px}
+ .welcome-title{font-size:clamp(33px,8.8vw,58px);letter-spacing:-1.4px;margin-bottom:16px}
+ .welcome-headline{font-size:clamp(24px,6vw,34px);margin-bottom:20px}
+ .welcome-motto{font-size:10px;letter-spacing:1.7px;margin-bottom:24px}
+ .welcome-actions{gap:10px}.welcome-actions .btn{padding:15px 17px;font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){.welcome-hero .welcome-copy>*,.welcome-hero .ignition-rings,.welcome-hero .ignition-headlights,.welcome-hero .ignition-roof{animation:none!important;opacity:1;transform:none}}

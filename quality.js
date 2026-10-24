@@ -78,24 +78,30 @@
   });
 })();
 
-// Start the lights only after the single scene is decoded; never trap navigation.
+// The welcome scene stays in the document after ignition; only opacity animates.
 (() => {
-  const intro = document.querySelector('.cinematic-intro');
-  if (!intro) return;
+  const hero = document.querySelector('.welcome-hero');
+  if (!hero) return;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let timer;
-  const dismiss = () => { intro.hidden = true; clearTimeout(timer); };
-  intro.querySelector('.intro-skip').addEventListener('click', dismiss);
-  intro.addEventListener('keydown', event => { if (event.key === 'Escape' || event.key === 'Tab') dismiss(); });
-  reduced.addEventListener('change', () => { if (reduced.matches) dismiss(); });
-  if (reduced.matches) { dismiss(); return; }
-  timer = setTimeout(dismiss, 6500);
+  const complete = () => {
+    clearTimeout(timer);
+    hero.classList.remove('is-awaiting');
+    hero.classList.add('is-complete');
+  };
+  const simple = reduced.matches || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) || (navigator.deviceMemory && navigator.deviceMemory <= 2);
+  reduced.addEventListener('change', () => { if (reduced.matches) complete(); });
+  hero.addEventListener('focusin', complete);
+  if (simple) { complete(); return; }
+  hero.classList.add('is-awaiting');
+  timer = setTimeout(complete, 6500);
   const scene = new Image();
   scene.src = 'assets/scene-front-1536.webp';
   scene.decode().then(() => {
-    if (intro.hidden) return;
-    intro.classList.add('is-running');
+    if (hero.classList.contains('is-complete')) return;
+    hero.classList.remove('is-awaiting');
+    hero.classList.add('is-running');
     clearTimeout(timer);
-    timer = setTimeout(dismiss, 4200);
-  }).catch(dismiss);
+    timer = setTimeout(complete, 5000);
+  }).catch(complete);
 })();

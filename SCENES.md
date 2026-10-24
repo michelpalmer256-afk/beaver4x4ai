@@ -8,12 +8,19 @@ Trois visuels fournis, conservés à la racine sans modification :
 | Rétroviseur | 4A8DB988-3212-41F2-BE11-70F4B18F7E5B.png | assets/scene-mirror-{768,1536}.webp |
 | Départ | 89527DE4-8277-421C-85D2-58E67180CCA2.png | assets/scene-departure-{768,1536}.webp |
 
-Le SVG d’introduction utilise un viewport `0 0 1152 1024` sur le montage original
-1536 × 1024 : sa bande latérale de références n’est jamais visible. Les lumières
-sont des formes SVG animées en opacité, alignées avec les phares de la grande
-scène : anneaux, phares principaux, puis cinq projecteurs de toit. Aucune vidéo,
-aucune bibliothèque supplémentaire. L’introduction est courte, peut être passée,
-s’efface aussi en cas d’image indisponible et disparaît en mode réduction des animations.
+L’accueil permanent (`#accueil`) utilise un SVG avec un viewport `0 0 1152 1024`
+sur le montage original 1536 × 1024 : sa bande latérale de références n’est jamais
+visible. La Jeep entière reste fixe. Les lumières sont des formes SVG transparentes
+alignées dans le même repère : anneaux, phares principaux, puis cinq projecteurs.
+Les halos radiaux et une réflexion légère sur le capot évitent les disques pleins.
+Aucun morceau d’image ni deuxième visuel d’accueil n’est superposé.
+
+Le titre, l’accroche, le slogan, puis les deux boutons apparaissent après les
+phares. Ils restent visibles : aucun écran temporaire, aucune redirection ni
+bascule automatique. Sur mobile, le texte commence sous les phares. En réduction
+des animations ou sur appareil aux capacités limitées, le résultat final apparaît
+sans animation. Sans JavaScript ou en cas d’échec de chargement, les liens restent
+accessibles. Le focus clavier révèle immédiatement les commandes.
 
 Ordre : accueil, fonctionnalités et captures officielles, quatre véhicules,
 Explore, rétroviseur, communauté, futures plateformes, départ. Les trois scènes
