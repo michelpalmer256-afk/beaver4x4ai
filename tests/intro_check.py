@@ -5,10 +5,12 @@ base = os.environ.get('BASE_URL', 'http://127.0.0.1:8000')
 with sync_playwright() as p:
     browser = p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH', '/usr/bin/chromium'), args=['--no-sandbox'])
     for width, height in [(320,740),(390,844),(844,390),(1440,900)]:
-        page = browser.new_page(viewport={'width':width,'height':height})
+        page = browser.new_page(viewport={'width':width,'height':height},is_mobile=width<=760,has_touch=width<=760,device_scale_factor=3 if width<=760 else 1)
         page.add_init_script('Object.defineProperty(navigator,"hardwareConcurrency",{get:()=>8});Object.defineProperty(navigator,"deviceMemory",{get:()=>8});')
         page.goto(base,wait_until='domcontentloaded')
         page.locator('.welcome-hero.is-running').wait_for()
+        assert page.locator('.ignition-layer').count()==3
+        assert page.locator('.ignition-layer').evaluate_all('(nodes)=>nodes.every(n=>n.tagName==="DIV" && getComputedStyle(n).willChange==="opacity" && getComputedStyle(n).filter==="none")')
         for elapsed, expected in [(0,[0,0,0]),(1150,[1,0,0]),(2100,[1,1,0]),(3100,[1,1,1])]:
             values=page.evaluate('''time=>['.ignition-rings','.ignition-headlights','.ignition-roof'].map(selector=>{
               const node=document.querySelector(selector);node.getAnimations().forEach(a=>{a.pause();a.currentTime=time});return Number(getComputedStyle(node).opacity);
@@ -16,6 +18,7 @@ with sync_playwright() as p:
             assert all(abs(a-b)<.02 for a,b in zip(values,expected)),(elapsed,values)
         page.wait_for_function("document.querySelector('.welcome-hero').classList.contains('is-complete')",timeout=8500)
         assert page.locator('.welcome-hero').is_visible()
+        assert page.locator('.ignition-layer').evaluate_all('(nodes)=>nodes.every(n=>getComputedStyle(n).willChange==="auto")')
         logo=page.locator('.welcome-logo')
         assert logo.evaluate('(n)=>n.decode().then(()=>n.naturalWidth===n.naturalHeight && n.naturalWidth>=512)')
         box=logo.bounding_box();assert abs(box['width']-box['height'])<1

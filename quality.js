@@ -99,7 +99,9 @@
   timer = setTimeout(complete, 6500);
   const scene = new Image();
   scene.src = 'assets/scene-front-1536.webp';
-  scene.decode().then(() => {
+  const logo = hero.querySelector('.welcome-logo');
+  const ready = logo ? Promise.all([scene.decode(), logo.decode().catch(() => {})]) : scene.decode();
+  ready.then(() => {
     if (hero.classList.contains('is-complete')) return;
     // Let the unlit scene paint first, including when its image is cached.
     requestAnimationFrame(() => requestAnimationFrame(() => {

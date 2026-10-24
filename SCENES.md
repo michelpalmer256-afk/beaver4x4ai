@@ -10,8 +10,9 @@ Trois visuels fournis, conservés à la racine sans modification :
 
 L’accueil permanent (`#accueil`) utilise un SVG avec un viewport `0 0 1152 1024`
 sur le montage original 1536 × 1024 : sa bande latérale de références n’est jamais
-visible. La Jeep entière reste fixe. Les lumières sont des formes SVG transparentes
-alignées dans le même repère : anneaux, phares principaux, puis cinq projecteurs.
+visible. La Jeep entière reste fixe. Les lumières sont des formes SVG transparentes fixes, dans trois couches HTML
+alignées dans le même repère. Seule l’opacité de ces couches est animée, avec
+préparation de la composition pendant la séquence et libération ensuite : anneaux, phares principaux, puis cinq projecteurs.
 Les halos radiaux et une réflexion légère sur le capot évitent les disques pleins.
 Aucun morceau d’image ni deuxième visuel d’accueil n’est superposé.
 
@@ -47,3 +48,8 @@ python3 tests/intro_check.py
 Serveur local : `python3 -m http.server 8000 --bind 127.0.0.1` dans le checkout
 existant. Les tests utilisent Playwright Python et Chromium. Safari iPhone réel
 reste à contrôler sur appareil. La photo distante Club préexistante est conservée.
+
+Optimisation mobile : aucun filtre CSS sur les phares ; photo et logo décodés
+avant la séquence. Sur écran tactile, les textes apparaissent en opacité seule.
+Le logo conserve son zoom. Les tests simulent aussi un écran tactile à densité ×3 ;
+ils ne prouvent pas la fluidité sur Safari iOS réel.
