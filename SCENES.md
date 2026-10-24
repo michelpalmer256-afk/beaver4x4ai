@@ -15,8 +15,11 @@ alignées dans le même repère : anneaux, phares principaux, puis cinq projecte
 Les halos radiaux et une réflexion légère sur le capot évitent les disques pleins.
 Aucun morceau d’image ni deuxième visuel d’accueil n’est superposé.
 
-Le titre, l’accroche, le slogan, puis les deux boutons apparaissent après les
-phares. Ils restent visibles : aucun écran temporaire, aucune redirection ni
+Le logo officiel illustré remplace le grand titre textuel : copie WebP de
+512 pixels issue de `05437786-5BB3-4633-B8A8-703A746EE62B.png`, sans recadrage
+ni déformation. Le fond clair est conservé car les sources ne sont pas transparentes.
+Le logo apparaît avec la rampe de toit (zoom 90 % à 100 % et lueur verte légère),
+puis l’accroche, le slogan et les deux boutons apparaissent à leur tour. Ils restent visibles : aucun écran temporaire, aucune redirection ni
 bascule automatique. Sur mobile, le texte commence sous les phares. En réduction
 des animations, le résultat final apparaît sans animation. Les appareils aux
 capacités limitées conservent la séquence légère en opacité : les estimations

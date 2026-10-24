@@ -220,7 +220,7 @@
 .welcome-hero .ignition-rings{filter:drop-shadow(0 0 3px #ffcb87)}
 /* SVG gradients provide the glow without depending on Safari blend modes. */
 .welcome-hero.is-awaiting .welcome-copy>*{opacity:0}
-.welcome-hero.is-running .welcome-title{animation:welcomeReveal .75s ease 2.9s both}
+.welcome-hero.is-running .welcome-title{animation:welcomeLogoReveal .85s cubic-bezier(.2,.7,.25,1) 2.15s both}
 .welcome-hero.is-running .welcome-headline{animation:welcomeReveal .75s ease 3.25s both}
 .welcome-hero.is-running .welcome-motto{animation:welcomeReveal .7s ease 3.65s both}
 .welcome-hero.is-running .welcome-actions{animation:welcomeReveal .7s ease 4.05s both}
@@ -237,3 +237,9 @@
  .welcome-actions{gap:10px}.welcome-actions .btn{padding:15px 17px;font-size:14px}
 }
 @media(prefers-reduced-motion:reduce){.welcome-hero .welcome-copy>*,.welcome-hero .ignition-rings,.welcome-hero .ignition-headlights,.welcome-hero .ignition-roof{animation:none!important;opacity:1;transform:none}}
+
+/* Full official illustration: preserve its aspect ratio and the existing header mark. */
+.welcome-title{width:min(260px,100%);font-size:inherit;line-height:0;white-space:normal;margin:0 0 26px;transform-origin:center}
+.welcome-logo{display:block;width:100%;height:auto;object-fit:contain;border-radius:18px;box-shadow:0 0 28px #35e59b20,0 0 60px #35e59b0d}
+@keyframes welcomeLogoReveal{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@media(max-width:760px){.welcome-title{width:clamp(150px,44vw,200px);margin:10px 0 22px}.welcome-logo{border-radius:14px}}

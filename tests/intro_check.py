@@ -16,6 +16,10 @@ with sync_playwright() as p:
             assert all(abs(a-b)<.02 for a,b in zip(values,expected)),(elapsed,values)
         page.wait_for_function("document.querySelector('.welcome-hero').classList.contains('is-complete')",timeout=8500)
         assert page.locator('.welcome-hero').is_visible()
+        logo=page.locator('.welcome-logo')
+        assert logo.evaluate('(n)=>n.decode().then(()=>n.naturalWidth===n.naturalHeight && n.naturalWidth>=512)')
+        box=logo.bounding_box();assert abs(box['width']-box['height'])<1
+        assert page.locator('header .brand-emblem').get_attribute('src')=='assets/beaver-logo.webp'
         assert page.locator('.intro,.hero').count()==0
         assert page.locator('.welcome-actions a').all_text_contents()==['Découvrir l’application','Explorer']
         assert page.locator('.welcome-actions').evaluate('(n)=>getComputedStyle(n).opacity')=='1'
