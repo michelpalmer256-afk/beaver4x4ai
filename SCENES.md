@@ -18,8 +18,9 @@ Aucun morceau d’image ni deuxième visuel d’accueil n’est superposé.
 Le titre, l’accroche, le slogan, puis les deux boutons apparaissent après les
 phares. Ils restent visibles : aucun écran temporaire, aucune redirection ni
 bascule automatique. Sur mobile, le texte commence sous les phares. En réduction
-des animations ou sur appareil aux capacités limitées, le résultat final apparaît
-sans animation. Sans JavaScript ou en cas d’échec de chargement, les liens restent
+des animations, le résultat final apparaît sans animation. Les appareils aux
+capacités limitées conservent la séquence légère en opacité : les estimations
+de processeur et de mémoire ne doivent pas désactiver l’allumage sur Safari. Sans JavaScript ou en cas d’échec de chargement, les liens restent
 accessibles. Le focus clavier révèle immédiatement les commandes.
 
 Ordre : accueil, fonctionnalités et captures officielles, quatre véhicules,

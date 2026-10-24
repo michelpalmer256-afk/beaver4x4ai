@@ -218,7 +218,7 @@
 .welcome-motto{font-size:11px;letter-spacing:2.2px;color:#9de9c1;font-weight:700;margin:0 0 22px}
 .welcome-actions{display:flex;gap:12px;flex-wrap:wrap}.welcome-actions .btn{margin:0;padding:16px 20px}.welcome-actions .outline{margin-left:0}
 .welcome-hero .ignition-rings{filter:drop-shadow(0 0 3px #ffcb87)}
-.welcome-hero .ignition-headlights,.welcome-hero .ignition-roof{mix-blend-mode:screen}
+/* SVG gradients provide the glow without depending on Safari blend modes. */
 .welcome-hero.is-awaiting .welcome-copy>*{opacity:0}
 .welcome-hero.is-running .welcome-title{animation:welcomeReveal .75s ease 2.9s both}
 .welcome-hero.is-running .welcome-headline{animation:welcomeReveal .75s ease 3.25s both}

@@ -35,6 +35,9 @@ with sync_playwright() as p:
         if mode=='slow':page.add_init_script('Object.defineProperty(navigator,"hardwareConcurrency",{get:()=>2});')
         if mode=='failed':page.route('**/assets/scene-front-1536.webp',lambda route:route.abort())
         page.goto(base,wait_until='domcontentloaded')
+        if mode=='slow':
+            page.locator('.welcome-hero.is-running').wait_for()
+            assert not page.locator('.welcome-hero').evaluate('(n)=>n.classList.contains("is-complete")')
         if mode!='no-js':page.wait_for_function("document.querySelector('.welcome-hero').classList.contains('is-complete')",timeout=8500)
         assert page.locator('.welcome-actions').evaluate('(n)=>getComputedStyle(n).opacity')=='1'
         print(mode+': welcome content remains available',flush=True)

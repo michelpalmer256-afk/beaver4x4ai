@@ -89,7 +89,9 @@
     hero.classList.remove('is-awaiting');
     hero.classList.add('is-complete');
   };
-  const simple = reduced.matches || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) || (navigator.deviceMemory && navigator.deviceMemory <= 2);
+  // Core and memory estimates are unreliable on mobile Safari. Opacity-only
+  // ignition is cheap enough to run on these devices as well.
+  const simple = reduced.matches;
   reduced.addEventListener('change', () => { if (reduced.matches) complete(); });
   hero.addEventListener('focusin', complete);
   if (simple) { complete(); return; }
@@ -99,9 +101,13 @@
   scene.src = 'assets/scene-front-1536.webp';
   scene.decode().then(() => {
     if (hero.classList.contains('is-complete')) return;
-    hero.classList.remove('is-awaiting');
-    hero.classList.add('is-running');
-    clearTimeout(timer);
-    timer = setTimeout(complete, 5000);
+    // Let the unlit scene paint first, including when its image is cached.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      if (hero.classList.contains('is-complete')) return;
+      hero.classList.remove('is-awaiting');
+      hero.classList.add('is-running');
+      clearTimeout(timer);
+      timer = setTimeout(complete, 5000);
+    }));
   }).catch(complete);
 })();
