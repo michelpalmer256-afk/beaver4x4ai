@@ -107,3 +107,39 @@
 @media(prefers-reduced-motion:reduce){
  .intro::before{animation:none!important;transform:none}
 }
+
+/* EXPLORE: native document scrolling, panoramic photography and restrained motion. */
+.explore-world{padding:90px 0 0;background:#030d0a}
+.explore-world>.wrap{padding-inline:6%;max-width:1288px}
+.explore-world .notice{max-width:760px}
+.explore-journey{margin-top:48px}
+.explore-scene{position:relative;isolation:isolate;min-height:520px;height:76vh;height:76svh;max-height:880px;overflow:hidden;display:flex;align-items:flex-end;background:#102a20}
+.explore-media{position:absolute;inset:-24px 0;z-index:-2;transform:translate3d(0,var(--explore-shift,0px),0)}
+.explore-media img{display:block;width:100%;height:100%;object-fit:cover}
+.explore-scene::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,#020b0820 10%,#020b0810 35%,#020b08e8 100%)}
+.explore-copy{width:100%;max-width:1288px;margin-inline:auto;padding:70px 6%;text-shadow:0 3px 24px #0008}
+.explore-index{font-size:12px;font-weight:800;letter-spacing:3px;color:#7dffbf}
+.explore-copy h3{font-size:clamp(36px,6vw,82px);line-height:1.05;letter-spacing:-1.5px;margin:18px 0}
+.explore-copy p{color:#ecf6f0;margin:0;font-size:clamp(17px,2vw,23px)}
+.explore-scene.explore-pending .explore-copy{opacity:.15;transform:translateY(24px)}
+.explore-copy{transition:opacity .85s ease,transform .85s ease}
+.explore-outro{padding-block:48px 70px}
+.explore-outro .outline{margin-left:0}
+.footer-links{font-size:14px}.footer-links a:hover{color:var(--green)}
+/* Separate caption and vehicle into stable rows, including landscape phones. */
+.intro-inner{position:absolute;top:9%;left:4%;right:4%;animation:introCaptionSafe .9s ease both!important;transform:none!important}
+.expedition-car{bottom:5%;width:min(88vw,710px,72svh)}
+@keyframes introCaptionSafe{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:760px){
+ .explore-scene{min-height:460px;height:72svh;max-height:760px}
+ .explore-copy{padding:48px 6%}.explore-copy h3{font-size:clamp(34px,9vw,62px)}
+ .intro-inner{top:9%}.intro .intro-mark{width:90px!important;height:90px!important;margin-bottom:16px}
+ .intro-sub{letter-spacing:2px}.expedition-car{width:min(96vw,62svh);bottom:8%}
+}
+@media(max-height:500px){
+ .intro-inner{top:5%}.intro .intro-mark{width:54px!important;height:54px!important;margin-bottom:6px}
+ .intro-word{font-size:26px}.intro-sub{font-size:9px;margin-top:6px}.expedition-car{width:min(60vw,62svh);bottom:2%}
+}
+@media(prefers-reduced-motion:reduce){
+ .explore-media{transform:none!important}.explore-copy{transition:none!important;opacity:1!important;transform:none!important}
+}

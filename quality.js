@@ -38,3 +38,45 @@
   }
   document.addEventListener('visibilitychange', () => document.documentElement.classList.toggle('motion-paused', document.hidden));
 })();
+
+// Enhance only visible scenes; the landscapes remain readable without JavaScript.
+(() => {
+  const scenes = [...document.querySelectorAll('.explore-scene')];
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  if (!scenes.length || !('IntersectionObserver' in window)) return;
+  const visible = new Set();
+  let frame = 0;
+  const render = () => {
+    frame = 0;
+    visible.forEach(scene => {
+      const box = scene.getBoundingClientRect();
+      const shift = Math.max(-18, Math.min(18, (innerHeight / 2 - box.top - box.height / 2) * .045));
+      scene.style.setProperty('--explore-shift', `${shift.toFixed(1)}px`);
+    });
+  };
+  const schedule = () => { if (!reduced.matches && !frame) frame = requestAnimationFrame(render); };
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(({target, isIntersecting}) => {
+      if (isIntersecting) {
+        visible.add(target);
+        target.classList.remove('explore-pending');
+      } else visible.delete(target);
+    });
+    schedule();
+  }, {threshold:0});
+  scenes.forEach(scene => {
+    if (!reduced.matches && scene.getBoundingClientRect().top >= innerHeight) scene.classList.add('explore-pending');
+    observer.observe(scene);
+  });
+  addEventListener('scroll', schedule, {passive:true});
+  addEventListener('resize', schedule, {passive:true});
+  reduced.addEventListener('change', () => {
+    scenes.forEach(scene => {
+      scene.classList.remove('explore-pending');
+      scene.style.removeProperty('--explore-shift');
+    });
+    if (frame) cancelAnimationFrame(frame);
+    frame = 0;
+    schedule();
+  });
+})();

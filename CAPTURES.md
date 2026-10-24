@@ -1,14 +1,28 @@
-# Captures de l’application
+# Captures de l’application — fichiers manquants
 
-Le carrousel conserve six emplacements. Quatre captures individuelles disponibles sont intégrées : Garage (`IMG_9807.png`), Trails World (`IMG_9809.png`), Copilote IA (`IMG_9808.png`), Mes véhicules (`IMG_9799.png`). Les originaux sont conservés ; les copies WebP de 660 pixels de large dans `assets/app-*.webp` servent à l’affichage, avec chargement différé.
+Le carrousel définitif doit utiliser ces six originaux, dans cet ordre :
 
-Club et Profil restent explicitement illustratifs. Pour intégrer leurs captures officielles :
+1. Accueil — `IMG_9956.jpeg`
+2. Garage — `IMG_9957.jpeg`
+3. Copilote IA — `IMG_9958.png`
+4. Trails World — `IMG_9959.jpeg`
+5. Club — `IMG_9960.jpeg`
+6. Profil — `IMG_9961.jpeg`
 
-1. Ajouter les fichiers dans `assets/app-club.webp` et `assets/app-profil.webp`, sans recadrer la capture. Privilégier une largeur de 660 pixels et conserver les proportions originales.
-2. Dans les deux articles correspondants de `index.html`, remplacer `is-placeholder` par `is-capture`, mettre à jour `src`, `alt`, `width` et `height` de l’image.
-3. Retirer les éléments `phone-notch` et `phone-overlay` de ces deux articles, puis remplacer « Capture officielle à venir » par leur description.
-4. Actualiser le paragraphe d’introduction du carrousel.
+Ces fichiers sont absents du checkout correspondant à `main` lors de cette
+intervention. Aucun ancien fichier n'a été renommé pour le faire passer pour
+une nouvelle capture officielle.
 
-Le rendu utilise `object-fit: contain` et un écran aux dimensions contraintes : aucune déformation ni découpe, même si une future capture possède d’autres proportions.
+Les deux cartes illustratives Club et Profil ont été retirées. Les quatre
+captures antérieures réellement disponibles restent temporairement affichées,
+sans mention promettant des captures à venir. Leur remplacement par les six
+originaux reste bloqué jusqu'à leur ajout au dépôt.
 
-Validation locale : `python3 -m http.server 8000 --bind 127.0.0.1`, puis vérifier le défilement tactile, les flèches et les six aperçus sur petit écran. La validation automatisée a été effectuée avec Chromium aux largeurs 320, 375, 390, 430, 768 et 1440 pixels ; un contrôle sur Safari iOS réel reste recommandé.
+Lors de leur réception, vérifier le contenu de chaque original, produire des
+copies WebP de 660 pixels de large en conservant l'intégralité et les proportions,
+puis remplacer les articles du carrousel dans l'ordre ci-dessus. Utiliser
+`object-fit: contain`, les véritables dimensions et des descriptions adaptées.
+Conserver les originaux. Ne pas intégrer de fausses captures ni de recadrage.
+
+Le carrousel utilise le défilement tactile natif, le scroll snap, des flèches et
+les touches directionnelles. La réduction des animations est respectée.
