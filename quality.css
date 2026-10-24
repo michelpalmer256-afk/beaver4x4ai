@@ -108,24 +108,34 @@
  .intro::before{animation:none!important;transform:none}
 }
 
-/* EXPLORE: native document scrolling, panoramic photography and restrained motion. */
-.explore-world{padding:90px 0 0;background:#030d0a}
-.explore-world>.wrap{padding-inline:6%;max-width:1288px}
-.explore-world .notice{max-width:760px}
-.explore-journey{margin-top:48px}
-.explore-scene{position:relative;isolation:isolate;min-height:520px;height:76vh;height:76svh;max-height:880px;overflow:hidden;display:flex;align-items:flex-end;background:#102a20}
-.explore-media{position:absolute;inset:-24px 0;z-index:-2;transform:translate3d(0,var(--explore-shift,0px),0)}
-.explore-media img{display:block;width:100%;height:100%;object-fit:cover}
-.explore-scene::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,#020b0820 10%,#020b0810 35%,#020b08e8 100%)}
-.explore-copy{width:100%;max-width:1288px;margin-inline:auto;padding:70px 6%;text-shadow:0 3px 24px #0008}
-.explore-index{font-size:12px;font-weight:800;letter-spacing:3px;color:#7dffbf}
-.explore-copy h3{font-size:clamp(36px,6vw,82px);line-height:1.05;letter-spacing:-1.5px;margin:18px 0}
-.explore-copy p{color:#ecf6f0;margin:0;font-size:clamp(17px,2vw,23px)}
-.explore-scene.explore-pending .explore-copy{opacity:.15;transform:translateY(24px)}
-.explore-copy{transition:opacity .85s ease,transform .85s ease}
-.explore-outro{padding-block:48px 70px}
+/* Existing sections carry the six landscapes behind a strong reading veil. */
+.landscape-section{position:relative;isolation:isolate;overflow:hidden;background:#04150f}
+.section-landscape{position:absolute;inset:-18px 0;z-index:-2;pointer-events:none;transform:translate3d(0,var(--explore-shift,0px),0)}
+.section-landscape img{display:block;width:100%;height:100%;object-fit:cover}
+.landscape-section::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,#03100fdb 0%,#03100fb8 48%,#03100ff0 100%)}
+#application::after{background:linear-gradient(180deg,#03100fed,#03100fb8 45%,#03100fee)}
+#application .app-showcase{margin-top:0}
+.landscape-section p{color:#d1dfd7}
+.explore-world{padding:85px 6%}
+.explore-world>.wrap{max-width:1150px}
+.explore-world .notice{max-width:760px;font-size:12px;color:#adc1b7}
+.explore-notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:36px}
+.explore-note{min-width:0;padding:24px;border:1px solid #7dffbf38;border-radius:18px;background:#03140fc7}
+.explore-index{font-size:10px;font-weight:800;letter-spacing:2px;color:#7dffbf}
+.explore-note h3{font-size:clamp(21px,2.2vw,28px);line-height:1.2;letter-spacing:-.5px;margin:14px 0}
+.explore-note p{font-size:15px;line-height:1.6;margin:0}
+.explore-note.explore-pending{opacity:.15;transform:translateY(18px)}
+.explore-note{transition:opacity .7s ease,transform .7s ease}
+.explore-outro{padding-top:26px}
 .explore-outro .outline{margin-left:0}
 .footer-links{font-size:14px}.footer-links a:hover{color:var(--green)}
+@media(max-width:760px){
+ .explore-world{padding:65px 5%}
+ .explore-notes{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .explore-note{padding:18px 14px}.explore-note h3{font-size:21px}
+ .explore-index{letter-spacing:1px;font-size:9px}
+}
+@media(max-width:360px){.explore-notes{grid-template-columns:1fr}}
 /* Separate caption and vehicle into stable rows, including landscape phones. */
 .intro-inner{position:absolute;top:9%;left:4%;right:4%;animation:introCaptionSafe .9s ease both!important;transform:none!important}
 .expedition-car{bottom:5%;width:min(88vw,710px,72svh)}
@@ -141,5 +151,5 @@
  .intro-word{font-size:26px}.intro-sub{font-size:9px;margin-top:6px}.expedition-car{width:min(60vw,62svh);bottom:2%}
 }
 @media(prefers-reduced-motion:reduce){
- .explore-media{transform:none!important}.explore-copy{transition:none!important;opacity:1!important;transform:none!important}
+ .section-landscape{transform:none!important}.explore-note{transition:none!important;opacity:1!important;transform:none!important}
 }

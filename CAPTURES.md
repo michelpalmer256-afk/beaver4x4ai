@@ -1,28 +1,21 @@
-# Captures de l’application — fichiers manquants
+# Captures officielles de l’application
 
-Le carrousel définitif doit utiliser ces six originaux, dans cet ordre :
+Six captures vérifiées visuellement et affichées dans cet ordre :
 
-1. Accueil — `IMG_9956.jpeg`
-2. Garage — `IMG_9957.jpeg`
-3. Copilote IA — `IMG_9958.png`
-4. Trails World — `IMG_9959.jpeg`
-5. Club — `IMG_9960.jpeg`
-6. Profil — `IMG_9961.jpeg`
+| Écran | Original fourni | Copie WebP |
+| --- | --- | --- |
+| Accueil | IMG_9956.png | assets/app-officiel-accueil.webp |
+| Garage | IMG_9957.png | assets/app-officiel-garage.webp |
+| Copilote IA | IMG_9958.png | assets/app-officiel-copilote.webp |
+| Trails | IMG_9959.png | assets/app-officiel-trails.webp |
+| Club | IMG_9960.png | assets/app-officiel-club.webp |
+| Profil | IMG_9961.png | assets/app-officiel-profil.webp |
 
-Ces fichiers sont absents du checkout correspondant à `main` lors de cette
-intervention. Aucun ancien fichier n'a été renommé pour le faire passer pour
-une nouvelle capture officielle.
+Les fichiers ajoutés sont tous des PNG (et non les extensions initialement
+annoncées). IMG_9955.png est une autre capture d’accueil, conservée sans affichage.
+Les originaux ne sont pas modifiés. Les copies ont une largeur de 660 pixels et
+conservent les proportions intégrales (660 × 1434), sans recadrage.
 
-Les deux cartes illustratives Club et Profil ont été retirées. Les quatre
-captures antérieures réellement disponibles restent temporairement affichées,
-sans mention promettant des captures à venir. Leur remplacement par les six
-originaux reste bloqué jusqu'à leur ajout au dépôt.
-
-Lors de leur réception, vérifier le contenu de chaque original, produire des
-copies WebP de 660 pixels de large en conservant l'intégralité et les proportions,
-puis remplacer les articles du carrousel dans l'ordre ci-dessus. Utiliser
-`object-fit: contain`, les véritables dimensions et des descriptions adaptées.
-Conserver les originaux. Ne pas intégrer de fausses captures ni de recadrage.
-
-Le carrousel utilise le défilement tactile natif, le scroll snap, des flèches et
-les touches directionnelles. La réduction des animations est respectée.
+Les anciens assets restent dans Git, mais ne sont plus utilisés par le carrousel.
+Le carrousel conserve le défilement tactile natif, le scroll snap, les flèches,
+les touches directionnelles et les cadres avec `object-fit: contain`.

@@ -34,14 +34,14 @@
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
       if (entry.isIntersecting) {entry.target.classList.add('scroll-visible');observer.unobserve(entry.target);}
     }), {threshold:.1});
-    document.querySelectorAll('.feature,.showcase-intro,.photo').forEach(el => observer.observe(el));
+    document.querySelectorAll('.feature,.showcase-intro,.photo,.explore-note').forEach(el => observer.observe(el));
   }
   document.addEventListener('visibilitychange', () => document.documentElement.classList.toggle('motion-paused', document.hidden));
 })();
 
 // Enhance only visible scenes; the landscapes remain readable without JavaScript.
 (() => {
-  const scenes = [...document.querySelectorAll('.explore-scene')];
+  const scenes = [...document.querySelectorAll('.landscape-section')];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   if (!scenes.length || !('IntersectionObserver' in window)) return;
   const visible = new Set();
@@ -57,15 +57,12 @@
   const schedule = () => { if (!reduced.matches && !frame) frame = requestAnimationFrame(render); };
   const observer = new IntersectionObserver(entries => {
     entries.forEach(({target, isIntersecting}) => {
-      if (isIntersecting) {
-        visible.add(target);
-        target.classList.remove('explore-pending');
-      } else visible.delete(target);
+      if (isIntersecting) visible.add(target);
+      else visible.delete(target);
     });
     schedule();
   }, {threshold:0});
   scenes.forEach(scene => {
-    if (!reduced.matches && scene.getBoundingClientRect().top >= innerHeight) scene.classList.add('explore-pending');
     observer.observe(scene);
   });
   addEventListener('scroll', schedule, {passive:true});

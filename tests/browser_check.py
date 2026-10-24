@@ -9,10 +9,14 @@ with sync_playwright() as p:
   page.on('pageerror',lambda e: errors.append(str(e)))
   page.goto(os.environ.get('BASE_URL', 'http://127.0.0.1:8000'),wait_until='domcontentloaded')
   page.wait_for_timeout(3000)
-  assert page.locator('.vehicle').count()==7
-  assert page.locator('.explore-scene').count()==6
+  assert page.locator('.vehicle').count()==4
+  assert page.locator('.landscape-section').count()==6
+  assert page.locator('.explore-scene').count()==0
+  assert page.locator('.showcase-slide').count()==6
+  assert page.locator('.phone-title').all_text_contents()==['Accueil','Garage','Copilote IA','Trails','Club','Profil']
+  assert page.locator('.vehicle strong').all_text_contents()==['Land Cruiser','Patrol','Defender','Wrangler']
   assert page.locator('.is-placeholder').count()==0
-  for image in page.locator('.vehicle img,.showcase-track img,.explore-media img').all():
+  for image in page.locator('.vehicle img,.showcase-track img,.section-landscape img').all():
    image.scroll_into_view_if_needed()
    image.evaluate('(img)=>img.decode()')
    assert image.evaluate('(img)=>img.naturalWidth > 0')
@@ -29,12 +33,14 @@ with sync_playwright() as p:
    assert track.evaluate('(e)=>e.scrollLeft')>0
   else:
    assert page.locator('.showcase-arrow.next').is_disabled()
-  for scene in page.locator('.explore-scene').all():
-   scene.scroll_into_view_if_needed();page.wait_for_timeout(100)
-   assert 'explore-pending' not in (scene.get_attribute('class') or '')
+  for image in page.locator('.phone-screen img').all():
+   assert 'app-officiel-' in image.get_attribute('src')
+   assert image.evaluate('(e)=>getComputedStyle(e).objectFit')=='contain'
+  if width <= 760:
+   assert page.locator('.beaver-vehicle-gallery').evaluate('(e)=>getComputedStyle(e).gridTemplateColumns.split(" ").length')==2
   for path in ['confidentialite.html','assistance.html']:
    assert page.request.get(os.environ.get('BASE_URL','http://127.0.0.1:8000')+'/'+path).status==200
-  print(json.dumps({'viewport':[width,height],'horizontalOverflow':False,'scenes':6,'vehicles':7,'carouselNext':'pass'}))
+  print(json.dumps({'viewport':[width,height],'horizontalOverflow':False,'scenes':6,'vehicles':4,'carouselNext':'pass'}))
   page.close()
  page=browser.new_page(viewport={'width':390,'height':844},reduced_motion='reduce')
  page.goto(os.environ.get('BASE_URL', 'http://127.0.0.1:8000'),wait_until='domcontentloaded')
