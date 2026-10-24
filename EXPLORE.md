@@ -15,7 +15,9 @@ arrière-plans intégrés aux sections :
 Voile sombre, images WebP responsives en 720/1440/1920 pixels, chargement différé
 et parallaxe limitée à 18 pixels. La réduction des animations désactive cet effet.
 Les slogans et avertissements déjà validés restent dans un bloc Explore compact.
-Le visuel Club existant et l’animation d’accueil sont conservés.
+Le visuel Club existant est conservé. L’introduction et les deux autres scènes
+Jeep sont documentées dans SCENES.md. Les six cartes montrent désormais leurs
+photographies, avec un dégradé sombre et les slogans conservés.
 La provenance des photographies est documentée dans PHOTOS.md.
 
 Depuis `/workspace/beaver4x4ai`, lancer :
@@ -29,6 +31,7 @@ Puis, avec Playwright Python et Chromium :
 ```sh
 node --check quality.js
 python3 tests/browser_check.py
+python3 tests/intro_check.py
 ```
 
 `BASE_URL` et `CHROMIUM_PATH` permettent de choisir le serveur et le navigateur.

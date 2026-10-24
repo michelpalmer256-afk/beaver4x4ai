@@ -77,3 +77,25 @@
     schedule();
   });
 })();
+
+// Start the lights only after the single scene is decoded; never trap navigation.
+(() => {
+  const intro = document.querySelector('.cinematic-intro');
+  if (!intro) return;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let timer;
+  const dismiss = () => { intro.hidden = true; clearTimeout(timer); };
+  intro.querySelector('.intro-skip').addEventListener('click', dismiss);
+  intro.addEventListener('keydown', event => { if (event.key === 'Escape' || event.key === 'Tab') dismiss(); });
+  reduced.addEventListener('change', () => { if (reduced.matches) dismiss(); });
+  if (reduced.matches) { dismiss(); return; }
+  timer = setTimeout(dismiss, 6500);
+  const scene = new Image();
+  scene.src = 'assets/scene-front-1536.webp';
+  scene.decode().then(() => {
+    if (intro.hidden) return;
+    intro.classList.add('is-running');
+    clearTimeout(timer);
+    timer = setTimeout(dismiss, 4200);
+  }).catch(dismiss);
+})();

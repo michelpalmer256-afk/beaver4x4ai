@@ -8,15 +8,19 @@ with sync_playwright() as p:
   page=browser.new_page(viewport={'width':width,'height':height},is_mobile=width<800,has_touch=True)
   page.on('pageerror',lambda e: errors.append(str(e)))
   page.goto(os.environ.get('BASE_URL', 'http://127.0.0.1:8000'),wait_until='domcontentloaded')
-  page.wait_for_timeout(3000)
+  page.locator('.intro').wait_for(state='hidden',timeout=8500)
   assert page.locator('.vehicle').count()==4
-  assert page.locator('.landscape-section').count()==6
+  assert page.locator('.landscape-section').count()==8
+  assert page.locator('.explore-card-photo').count()==6
+  assert page.locator('main > section').evaluate_all('(nodes)=>nodes.map(n=>n.id)')==['fonctionnalites','application','vehicules','explore','horizon','club','futures-versions','depart']
+  assert page.locator('#depart').inner_text().find('Disponible sur l’App Store fin novembre 2026')>=0
+  assert page.locator('#depart a').count()==0
   assert page.locator('.explore-scene').count()==0
   assert page.locator('.showcase-slide').count()==6
   assert page.locator('.phone-title').all_text_contents()==['Accueil','Garage','Copilote IA','Trails','Club','Profil']
   assert page.locator('.vehicle strong').all_text_contents()==['Land Cruiser','Patrol','Defender','Wrangler']
   assert page.locator('.is-placeholder').count()==0
-  for image in page.locator('.vehicle img,.showcase-track img,.section-landscape img').all():
+  for image in page.locator('.vehicle img,.showcase-track img,.section-landscape img,.explore-card-photo').all():
    image.scroll_into_view_if_needed()
    image.evaluate('(img)=>img.decode()')
    assert image.evaluate('(img)=>img.naturalWidth > 0')
@@ -40,7 +44,7 @@ with sync_playwright() as p:
    assert page.locator('.beaver-vehicle-gallery').evaluate('(e)=>getComputedStyle(e).gridTemplateColumns.split(" ").length')==2
   for path in ['confidentialite.html','assistance.html']:
    assert page.request.get(os.environ.get('BASE_URL','http://127.0.0.1:8000')+'/'+path).status==200
-  print(json.dumps({'viewport':[width,height],'horizontalOverflow':False,'scenes':6,'vehicles':4,'carouselNext':'pass'}))
+  print(json.dumps({'viewport':[width,height],'horizontalOverflow':False,'backgrounds':8,'vehicles':4,'carouselNext':'pass'}))
   page.close()
  page=browser.new_page(viewport={'width':390,'height':844},reduced_motion='reduce')
  page.goto(os.environ.get('BASE_URL', 'http://127.0.0.1:8000'),wait_until='domcontentloaded')

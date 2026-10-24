@@ -153,3 +153,55 @@
 @media(prefers-reduced-motion:reduce){
  .section-landscape{transform:none!important}.explore-note{transition:none!important;opacity:1!important;transform:none!important}
 }
+
+/* One front scene: the SVG viewport excludes the reference strip in the original. */
+.cinematic-intro{display:flex;align-items:center;justify-content:center;background:#04100d!important;pointer-events:auto;animation:introOut .6s ease 6s both}
+.cinematic-intro::before,.cinematic-intro::after{display:none}
+.cinematic-intro[hidden]{display:none!important}
+.cinematic-brand{position:absolute;top:max(20px,env(safe-area-inset-top));left:0;right:0;display:flex;justify-content:center;align-items:center;gap:12px;z-index:2}
+.cinematic-brand strong{font-size:24px;font-weight:900}.cinematic-brand span{color:var(--green)}
+.cinematic-brand small{display:block;font-size:8px;letter-spacing:2px;margin-top:6px;color:#b9dec9}
+.ignition-stage{width:min(115vw,1000px,calc((100svh - 150px)*1.125));aspect-ratio:1152/1024;flex-shrink:0;overflow:hidden;border-radius:8px}
+.ignition-stage svg{display:block;width:100%;height:100%;overflow:hidden}
+.ignition-rings,.ignition-headlights,.ignition-roof{opacity:0}
+.ignition-rings{filter:drop-shadow(0 0 5px #ffbe65)}
+.cinematic-intro.is-running{animation-delay:3.5s}
+.is-running .ignition-rings{animation:ignitionOn .65s ease .45s both}
+.is-running .ignition-headlights{animation:ignitionOn .8s ease 1.25s both}
+.is-running .ignition-roof{animation:ignitionOn .7s ease 2.15s both}
+@keyframes ignitionOn{from{opacity:0}to{opacity:1}}
+.intro-skip{position:absolute;bottom:max(24px,env(safe-area-inset-bottom));right:6%;min-height:44px;padding:10px 16px;border:1px solid #7dffbf70;border-radius:10px;background:#04150fdd;color:#d9f9e7;cursor:pointer;font:inherit;font-size:13px}
+.intro-skip:focus-visible{outline:3px solid var(--green);outline-offset:4px}
+/* Photographic Explore cards remain compact, with readable gradients. */
+.explore-note{position:relative;isolation:isolate;overflow:hidden;min-height:260px;display:flex;flex-direction:column;justify-content:flex-end;background:#061a12}
+.explore-card-photo{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+.explore-note::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#03100f08,#03100f70 35%,#03100ff2)}
+@media(hover:hover){.explore-note:hover .explore-card-photo{transform:scale(1.035)}}
+.journey-scene{height:68svh;min-height:400px;max-height:780px;display:flex;align-items:flex-end}
+.journey-scene .section-landscape img{object-position:center}
+.journey-scene::after{background:linear-gradient(180deg,#03100f40,transparent 30%,#03100fbf)}
+.journey-caption{width:100%}.journey-caption p{font-size:clamp(22px,3vw,36px);font-weight:700;color:#fff}
+.departure-scene{min-height:680px;height:92svh;max-height:1100px;display:flex;align-items:flex-end}
+.departure-scene .section-landscape img{object-position:65% center}
+.departure-scene::after{background:linear-gradient(180deg,#03100f08,transparent 35%,#03100f90 64%,#03100ff5)}
+.departure-copy{width:100%;text-shadow:0 3px 18px #0009}
+.departure-copy h2{max-width:780px;font-size:clamp(36px,5.5vw,72px)}
+.departure-brand{font-weight:900;font-size:clamp(25px,4vw,44px);letter-spacing:-1px;margin:16px 0;color:#fff!important}.departure-brand span{color:var(--green)}
+.departure-copy .release-date{font-size:clamp(16px,2vw,22px);color:#e2f7e9}
+@media(max-width:760px){
+ .explore-note{min-height:265px}.journey-scene{height:auto;min-height:0;aspect-ratio:3/2;padding:28px 5%}
+ .journey-caption .eyebrow{font-size:10px}.journey-caption p{font-size:18px;margin-bottom:0}
+ .departure-scene{min-height:650px;height:90svh;padding-bottom:50px}
+ .departure-scene .section-landscape img{object-position:65% center}
+ .cinematic-brand strong{font-size:20px}
+}
+@media(max-height:500px){.cinematic-brand{top:10px}.cinematic-brand img{width:34px;height:34px}.cinematic-brand small{display:none}.ignition-stage{width:calc((100svh - 65px)*1.125)}.intro-skip{bottom:12px;right:12px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.cinematic-intro{display:none!important}.explore-card-photo{transition:none!important}.section-landscape{transform:none!important}}
+/* Keep both the adventurer and the complete rear Jeep in the mobile frame. */
+@media(max-width:760px){
+ .departure-scene{display:block;height:auto;min-height:0;max-height:none;padding:0}
+ .departure-scene .section-landscape{position:relative;inset:auto;aspect-ratio:1;transform:none!important}
+ .departure-scene .section-landscape img{object-position:right center}
+ .departure-scene::after{background:linear-gradient(180deg,transparent 30%,#03100f20 45%,#03100f 64%)}
+ .departure-copy{padding:32px 5% 55px;position:relative}
+}
