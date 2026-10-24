@@ -57,3 +57,8 @@
 .expedition-photo{aspect-ratio:650/350;filter:drop-shadow(0 12px 14px #0009)}
 .expedition-photo>img{display:block;width:100%;height:100%;object-fit:contain;animation:expeditionSuspension 2.65s ease-out both;transform-origin:50% 80%}
 @keyframes expeditionSuspension{0%,100%{transform:translateY(0) rotate(0)}35%{transform:translateY(-3px) rotate(-.7deg)}53%{transform:translateY(2px) rotate(.4deg)}70%{transform:translateY(-1px) rotate(-.2deg)}85%{transform:translateY(0) rotate(0)}}
+
+/* Full landscape assets: preserve the complete vehicle and supplied background. */
+.beaver-vehicle-gallery .vehicle img{inset:0 0 auto!important;height:calc(100% - 104px)!important;object-fit:contain!important;object-position:center!important;transform:none!important;filter:none!important}
+.beaver-vehicle-gallery .vehicle:hover img{transform:none!important;filter:none!important}
+.beaver-vehicle-gallery .vehicle:after{background:linear-gradient(180deg,transparent 60%,#03120f66 76%,#03120f 100%)!important}
