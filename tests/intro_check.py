@@ -2,10 +2,11 @@
 import os
 from playwright.sync_api import sync_playwright
 base = os.environ.get('BASE_URL', 'http://127.0.0.1:8000')
+language = os.environ.get('SITE_LANGUAGE', 'fr')
 with sync_playwright() as p:
     browser = p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH', '/usr/bin/chromium'), args=['--no-sandbox'])
     for width, height in [(320,740),(390,844),(844,390),(1440,900)]:
-        page = browser.new_page(viewport={'width':width,'height':height},is_mobile=width<=760,has_touch=width<=760,device_scale_factor=3 if width<=760 else 1)
+        page = browser.new_page(locale='en-GB' if language=='en' else 'fr-FR',viewport={'width':width,'height':height},is_mobile=width<=760,has_touch=width<=760,device_scale_factor=3 if width<=760 else 1)
         page.add_init_script('Object.defineProperty(navigator,"hardwareConcurrency",{get:()=>8});Object.defineProperty(navigator,"deviceMemory",{get:()=>8});')
         page.goto(base,wait_until='domcontentloaded')
         page.locator('.welcome-hero.is-running').wait_for()
@@ -22,12 +23,12 @@ with sync_playwright() as p:
         assert page.locator('.welcome-hero').is_visible()
         assert page.locator('.ignition-layer').evaluate_all('(nodes)=>nodes.every(n=>getComputedStyle(n).willChange==="auto")')
         logo=page.locator('.welcome-logo')
-        assert logo.get_attribute('src')=='assets/beaver-logo-welcome-transparent.webp'
+        assert logo.get_attribute('src').endswith('assets/beaver-logo-welcome-transparent.webp')
         assert logo.evaluate('(n)=>n.decode().then(()=>n.naturalWidth===n.naturalHeight && n.naturalWidth>=512)')
         box=logo.bounding_box();assert abs(box['width']-box['height'])<1
-        assert page.locator('header .brand-emblem').get_attribute('src')=='assets/beaver-logo.webp'
+        assert page.locator('header .brand-emblem').get_attribute('src').endswith('assets/beaver-logo.webp')
         assert page.locator('.intro,.hero').count()==0
-        assert page.locator('.welcome-actions a').all_text_contents()==['Découvrir l’application','Explorer']
+        assert page.locator('.welcome-actions a').all_text_contents()==(['Discover the app','Explore'] if language=='en' else ['Découvrir l’application','Explorer'])
         assert page.locator('.welcome-actions').evaluate('(n)=>getComputedStyle(n).opacity')=='1'
         assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
         # Text must begin below the roof lights on phones and beside them on desktop.
@@ -41,7 +42,7 @@ with sync_playwright() as p:
         print(f'{width}×{height}: lights, persistent copy, layout and Explorer link pass',flush=True)
         page.close()
     for mode in ['reduced','slow','failed','no-js']:
-        page=browser.new_page(reduced_motion='reduce' if mode=='reduced' else 'no-preference',java_script_enabled=mode!='no-js')
+        page=browser.new_page(locale='en-GB' if language=='en' else 'fr-FR',reduced_motion='reduce' if mode=='reduced' else 'no-preference',java_script_enabled=mode!='no-js')
         if mode=='slow':page.add_init_script('Object.defineProperty(navigator,"hardwareConcurrency",{get:()=>2});')
         if mode=='failed':page.route('**/assets/scene-front-1536.webp',lambda route:route.abort())
         page.goto(base,wait_until='domcontentloaded')

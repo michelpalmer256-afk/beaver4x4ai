@@ -98,7 +98,7 @@
   hero.classList.add('is-awaiting');
   timer = setTimeout(complete, 6500);
   const scene = new Image();
-  scene.src = 'assets/scene-front-1536.webp';
+  scene.src = hero.querySelector('.ignition-stage image').getAttribute('href');
   const logo = hero.querySelector('.welcome-logo');
   const ready = logo ? Promise.all([scene.decode(), logo.decode().catch(() => {})]) : scene.decode();
   ready.then(() => {
