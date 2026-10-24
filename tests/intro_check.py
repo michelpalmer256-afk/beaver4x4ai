@@ -9,6 +9,8 @@ with sync_playwright() as p:
         page.add_init_script('Object.defineProperty(navigator,"hardwareConcurrency",{get:()=>8});Object.defineProperty(navigator,"deviceMemory",{get:()=>8});')
         page.goto(base,wait_until='domcontentloaded')
         page.locator('.welcome-hero.is-running').wait_for()
+        timings=page.evaluate('''()=>{const logo=getComputedStyle(document.querySelector('.welcome-title'));const roof=getComputedStyle(document.querySelector('.ignition-roof'));return [parseFloat(logo.animationDelay),parseFloat(roof.animationDelay)+parseFloat(roof.animationDuration)]}''')
+        assert timings[0]>=timings[1],timings
         assert page.locator('.ignition-layer').count()==3
         assert page.locator('.ignition-layer').evaluate_all('(nodes)=>nodes.every(n=>n.tagName==="DIV" && getComputedStyle(n).willChange==="opacity" && getComputedStyle(n).filter==="none")')
         for elapsed, expected in [(0,[0,0,0]),(1150,[1,0,0]),(2100,[1,1,0]),(3100,[1,1,1])]:
@@ -20,6 +22,7 @@ with sync_playwright() as p:
         assert page.locator('.welcome-hero').is_visible()
         assert page.locator('.ignition-layer').evaluate_all('(nodes)=>nodes.every(n=>getComputedStyle(n).willChange==="auto")')
         logo=page.locator('.welcome-logo')
+        assert logo.get_attribute('src')=='assets/beaver-logo-welcome-transparent.webp'
         assert logo.evaluate('(n)=>n.decode().then(()=>n.naturalWidth===n.naturalHeight && n.naturalWidth>=512)')
         box=logo.bounding_box();assert abs(box['width']-box['height'])<1
         assert page.locator('header .brand-emblem').get_attribute('src')=='assets/beaver-logo.webp'

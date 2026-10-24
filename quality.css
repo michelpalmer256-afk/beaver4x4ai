@@ -220,10 +220,10 @@
 .welcome-hero .ignition-rings{filter:none}
 /* SVG gradients provide the glow without depending on Safari blend modes. */
 .welcome-hero.is-awaiting .welcome-copy>*{opacity:0}
-.welcome-hero.is-running .welcome-title{animation:welcomeLogoReveal .85s cubic-bezier(.2,.7,.25,1) 2.15s both}
-.welcome-hero.is-running .welcome-headline{animation:welcomeReveal .75s ease 3.25s both}
-.welcome-hero.is-running .welcome-motto{animation:welcomeReveal .7s ease 3.65s both}
-.welcome-hero.is-running .welcome-actions{animation:welcomeReveal .7s ease 4.05s both}
+.welcome-hero.is-running .welcome-title{animation:welcomeLogoReveal .7s cubic-bezier(.2,.7,.25,1) 2.95s both}
+.welcome-hero.is-running .welcome-headline{animation:welcomeReveal .65s ease 3.7s both}
+.welcome-hero.is-running .welcome-motto{animation:welcomeReveal .6s ease 4.05s both}
+.welcome-hero.is-running .welcome-actions{animation:welcomeReveal .65s ease 4.45s both}
 @keyframes welcomeReveal{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
 .welcome-hero.is-complete .welcome-copy>*,.welcome-hero.is-complete .ignition-rings,.welcome-hero.is-complete .ignition-headlights,.welcome-hero.is-complete .ignition-roof{animation:none!important;opacity:1;transform:none}
 @media(max-width:760px){
@@ -257,3 +257,8 @@
  .welcome-hero.is-running .welcome-motto,
  .welcome-hero.is-running .welcome-actions{animation-name:welcomeFadeMobile}
 }
+
+/* Transparent badge: a static radial glow avoids a square backing or blur filter. */
+.welcome-title{position:relative;isolation:isolate}
+.welcome-title::before{content:"";position:absolute;inset:8%;z-index:-1;pointer-events:none;border-radius:50%;background:radial-gradient(ellipse,#35e59b22,transparent 72%)}
+.welcome-title .welcome-logo{border-radius:0;box-shadow:none}

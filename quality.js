@@ -109,7 +109,7 @@
       hero.classList.remove('is-awaiting');
       hero.classList.add('is-running');
       clearTimeout(timer);
-      timer = setTimeout(complete, 5000);
+      timer = setTimeout(complete, 5400);
     }));
   }).catch(complete);
 })();

@@ -16,10 +16,13 @@ préparation de la composition pendant la séquence et libération ensuite : ann
 Les halos radiaux et une réflexion légère sur le capot évitent les disques pleins.
 Aucun morceau d’image ni deuxième visuel d’accueil n’est superposé.
 
-Le logo officiel illustré remplace le grand titre textuel : copie WebP de
-512 pixels issue de `05437786-5BB3-4633-B8A8-703A746EE62B.png`, sans recadrage
-ni déformation. Le fond clair est conservé car les sources ne sont pas transparentes.
-Le logo apparaît avec la rampe de toit (zoom 90 % à 100 % et lueur verte légère),
+Le logo officiel illustré remplace le grand titre textuel : copie WebP RGBA de
+512 pixels (`assets/beaver-logo-welcome-transparent.webp`). Le détourage issu du
+logo fourni est conservé en PNG dans `assets/beaver-logo-transparent.png` ; seuls
+les blancs extérieurs au badge sont transparents, les blancs du dessin restent
+visibles. Le petit logo d’en-tête et les sources originales sont conservés.
+Le logo apparaît après la fin de l’allumage de la rampe de toit (zoom 90 % à 100 %
+et lueur verte statique, sans filtre de flou animé),
 puis l’accroche, le slogan et les deux boutons apparaissent à leur tour. Ils restent visibles : aucun écran temporaire, aucune redirection ni
 bascule automatique. Sur mobile, le texte commence sous les phares. En réduction
 des animations, le résultat final apparaît sans animation. Les appareils aux
