@@ -262,3 +262,13 @@
 .welcome-title{position:relative;isolation:isolate}
 .welcome-title::before{content:"";position:absolute;inset:8%;z-index:-1;pointer-events:none;border-radius:50%;background:radial-gradient(ellipse,#35e59b22,transparent 72%)}
 .welcome-title .welcome-logo{border-radius:0;box-shadow:none}
+
+/* Start in darkness; unveil the unchanged photo as the three light stages ignite. */
+.ignition-night{position:absolute;inset:0;background:#000;pointer-events:none;opacity:0}
+.js-ignition .ignition-night{opacity:.94;animation:ignitionNightSafety .1s linear 7s forwards}
+.welcome-hero.is-awaiting .ignition-night{opacity:.94;animation:none;will-change:opacity}
+.welcome-hero.is-running .ignition-night{animation:ignitionNightReveal 2.85s ease both;will-change:opacity}
+@keyframes ignitionNightReveal{0%,12%{opacity:.94}36%{opacity:.8}65%{opacity:.42}100%{opacity:0}}
+@keyframes ignitionNightSafety{to{opacity:0}}
+.welcome-hero.is-complete .ignition-night{opacity:0;animation:none;will-change:auto}
+@media(prefers-reduced-motion:reduce){.js-ignition .ignition-night{opacity:0!important;animation:none!important;will-change:auto}}

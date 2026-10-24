@@ -56,3 +56,10 @@ Optimisation mobile : aucun filtre CSS sur les phares ; photo et logo décodés
 avant la séquence. Sur écran tactile, les textes apparaissent en opacité seule.
 Le logo conserve son zoom. Les tests simulent aussi un écran tactile à densité ×3 ;
 ils ne prouvent pas la fluidité sur Safari iOS réel.
+
+Ouverture sombre : un voile noir non interactif est placé entre la photo et les
+couches lumineuses, dès le premier rendu. Son opacité décroît pendant les trois
+étapes d’allumage ; la photo, son cadrage et les positions des phares restent fixes.
+Le voile disparaît entièrement avant le logo. Il est désactivé en mouvement réduit
+et sans JavaScript, avec un repli automatique si le script ou l’image ne charge pas.
+La même séquence est utilisée en français et en anglais.

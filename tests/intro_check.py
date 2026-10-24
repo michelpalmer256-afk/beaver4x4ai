@@ -14,13 +14,22 @@ with sync_playwright() as p:
         assert timings[0]>=timings[1],timings
         assert page.locator('.ignition-layer').count()==3
         assert page.locator('.ignition-layer').evaluate_all('(nodes)=>nodes.every(n=>n.tagName==="DIV" && getComputedStyle(n).willChange==="opacity" && getComputedStyle(n).filter==="none")')
+        assert page.locator('.ignition-night').evaluate('(n)=>n.previousElementSibling.tagName.toLowerCase()==="svg" && n.nextElementSibling.classList.contains("ignition-rings")')
+        initial_night=None
         for elapsed, expected in [(0,[0,0,0]),(1150,[1,0,0]),(2100,[1,1,0]),(3100,[1,1,1])]:
             values=page.evaluate('''time=>['.ignition-rings','.ignition-headlights','.ignition-roof'].map(selector=>{
               const node=document.querySelector(selector);node.getAnimations().forEach(a=>{a.pause();a.currentTime=time});return Number(getComputedStyle(node).opacity);
             })''',elapsed)
             assert all(abs(a-b)<.02 for a,b in zip(values,expected)),(elapsed,values)
+            darkness=page.locator('.ignition-night').evaluate('(n,time)=>{n.getAnimations().forEach(a=>{a.pause();a.currentTime=time});return Number(getComputedStyle(n).opacity)}',elapsed)
+            if elapsed==0:
+                assert darkness>=.9
+                initial_night=darkness
+            elif elapsed==3100: assert darkness==0
+            else: assert 0<darkness<initial_night
         page.wait_for_function("document.querySelector('.welcome-hero').classList.contains('is-complete')",timeout=8500)
         assert page.locator('.welcome-hero').is_visible()
+        assert page.locator('.ignition-night').evaluate('(n)=>getComputedStyle(n).opacity')=='0'
         assert page.locator('.ignition-layer').evaluate_all('(nodes)=>nodes.every(n=>getComputedStyle(n).willChange==="auto")')
         logo=page.locator('.welcome-logo')
         assert logo.get_attribute('src').endswith('assets/beaver-logo-welcome-transparent.webp')
@@ -51,6 +60,7 @@ with sync_playwright() as p:
             assert not page.locator('.welcome-hero').evaluate('(n)=>n.classList.contains("is-complete")')
         if mode!='no-js':page.wait_for_function("document.querySelector('.welcome-hero').classList.contains('is-complete')",timeout=8500)
         assert page.locator('.welcome-actions').evaluate('(n)=>getComputedStyle(n).opacity')=='1'
+        assert page.locator('.ignition-night').evaluate('(n)=>getComputedStyle(n).opacity')=='0'
         print(mode+': welcome content remains available',flush=True)
         page.close()
     browser.close()
