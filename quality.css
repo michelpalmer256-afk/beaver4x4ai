@@ -1,0 +1,54 @@
+/* Final responsive pass: retain the existing palette and composition. */
+.wrap,.feature,.showcase-carousel{min-width:0}
+.showcase-track{align-items:flex-start;overscroll-behavior-x:contain;touch-action:pan-x pan-y}
+.showcase-slide{flex:0 0 min(235px,100%);scroll-snap-stop:always}
+.showcase-slide .phone-shell{aspect-ratio:1320/2868;width:100%;max-width:235px;padding:0;border-radius:30px}
+.showcase-slide .phone-screen{position:absolute;inset:0;border-radius:23px;height:auto}
+.showcase-slide .phone-screen>img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;filter:none}
+.is-placeholder .phone-screen>img{filter:brightness(.65)}
+.showcase-arrow{min-width:44px;min-height:44px;top:40%}
+.showcase-arrow:disabled{opacity:.35;cursor:default}
+.showcase-arrow:focus-visible,.showcase-track:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.showcase-carousel{padding-inline:52px}
+.phone-title{font-size:16px;line-height:1.4}
+.phone-desc{font-size:13px}
+.future-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:36px}
+.future-grid .feature{min-height:180px}
+.future-grid p{color:var(--green);font-size:15px}
+.hero{background-attachment:scroll}
+/* Animate the tread layers with transforms rather than repainting backgrounds. */
+.intro-tire{animation-name:treadTravel!important}
+@keyframes treadTravel{from{opacity:0;translate:0 -140px}40%{opacity:.25}to{opacity:.1;translate:0 100px}}
+.intro-expedition{contain:layout paint}
+.expedition-car{width:min(88vw,710px)}
+@media(max-width:760px){
+ header{gap:10px;padding-inline:4%}
+ header>div{min-width:0}
+ .logo{font-size:clamp(16px,4.8vw,21px);white-space:nowrap}
+ .tag{font-size:7px;letter-spacing:1.5px}
+ .brand-emblem{width:29px;height:29px;margin-right:5px}
+ .mobile-menu summary{padding:11px;min-height:44px;white-space:nowrap}
+ .hero h1{font-size:clamp(35px,9.7vw,68px);letter-spacing:-2px}
+ .hero .btn{display:block;width:100%;text-align:center;margin-left:0}
+ .eyebrow,.showcase-kicker{overflow-wrap:anywhere;line-height:1.6}
+ .showcase-carousel{padding-inline:0}
+ .showcase-track{padding:12px 4px 24px;gap:18px;scroll-padding-inline:4px}
+ .showcase-slide{flex-basis:min(235px,calc(100% - 28px));max-width:none}
+ .showcase-arrow{position:static;display:inline-flex;align-items:center;justify-content:center;margin:8px 6px 0 0}
+ .showcase-carousel{display:flex;flex-wrap:wrap}
+ .showcase-track{order:0;width:100%}
+ .showcase-arrow.prev{order:1}.showcase-arrow.next{order:2}
+ .showcase-actions{gap:14px}.showcase-actions .btn{width:100%;text-align:center}
+ .feature .num{overflow-wrap:anywhere}
+ .feature b{overflow-wrap:break-word}
+ .future-grid{grid-template-columns:1fr;gap:12px}
+ .future-grid .feature{min-height:0}
+ .vehicle strong{overflow-wrap:break-word}
+ .expedition-car{width:min(96vw,650px);bottom:10%}
+}
+@media(max-width:360px){.features{grid-template-columns:1fr}.brand-emblem{width:25px;height:25px}.mobile-menu summary{font-size:14px}}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+ .intro{display:none!important}
+}
+.motion-paused *,.motion-paused *::before,.motion-paused *::after{animation-play-state:paused!important}
