@@ -62,3 +62,48 @@
 .beaver-vehicle-gallery .vehicle img{inset:0 0 auto!important;height:calc(100% - 104px)!important;object-fit:contain!important;object-position:center!important;transform:none!important;filter:none!important}
 .beaver-vehicle-gallery .vehicle:hover img{transform:none!important;filter:none!important}
 .beaver-vehicle-gallery .vehicle:after{background:linear-gradient(180deg,transparent 60%,#03120f66 76%,#03120f 100%)!important}
+
+
+/* Beaver intro: cinematic landscape behind the existing animated Wrangler. */
+.intro{
+  isolation:isolate;
+  background:#071710!important;
+}
+.intro::before{
+  content:"";
+  position:absolute;
+  inset:-3%;
+  z-index:0;
+  background-image:
+    linear-gradient(180deg,rgba(2,13,12,.48) 0%,rgba(3,20,16,.18) 40%,rgba(2,13,11,.38) 78%,rgba(2,12,10,.75) 100%),
+    url("https://images.pexels.com/photos/163848/road-mountains-sunset-path-163848.jpeg?auto=compress&cs=tinysrgb&w=1400");
+  background-position:center,center 52%;
+  background-size:cover;
+  background-repeat:no-repeat;
+  transform:scale(1.045);
+  animation:introLandscape 3s ease-out both;
+  will-change:transform;
+}
+.intro::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:radial-gradient(ellipse at 50% 40%,rgba(2,20,14,.05),rgba(1,12,10,.3) 80%);
+}
+.intro-tire{z-index:1;opacity:.12!important;filter:none!important}
+.intro-inner{z-index:3;text-shadow:0 3px 18px #00170ff0}
+.intro-expedition{z-index:2}
+.expedition-photo{filter:drop-shadow(0 18px 20px #000b)}
+@keyframes introLandscape{
+  from{transform:scale(1.085) translateY(8px)}
+  to{transform:scale(1.045) translateY(0)}
+}
+@media(max-width:760px){
+ .intro::before{background-position:center,58% center}
+ .intro-tire{opacity:.075!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .intro::before{animation:none!important;transform:none}
+}
