@@ -10,7 +10,8 @@ Paysages conservés. Les originaux ne sont pas modifiés. Copies WebP de 640 et 
 | Wrangler | `BF37FAA1-3C94-4BC9-A0DB-106D0A6D43BC.png` |
 | Hilux | `C84BA429-C2EB-4DE9-8604-B10A22974646.png` |
 | Raptor | `5BF49D68-26E1-4B02-98A2-0756CE80828E.png` |
+| Defender | Visuel généré pour compléter la série, disponible dans `assets/beaver-defender-{640,960}.webp` |
 
 Le Wrangler détouré est utilisé uniquement pour l’animation d’accueil (`assets/beaver-wrangler-intro.webp`). Le paysage original reste dans la galerie.
 
-Le septième visuel, Defender, est absent du dépôt au commit b519e35. Ne pas lui associer une photo d’un autre modèle ; ajouter sa carte lorsque son fichier sera disponible.
+Le Defender 110 a été généré avec l’accord de l’utilisateur dans la même ambiance que les six visuels fournis : préparation off-road, carrosserie vert foncé, identité Beaver et coucher de soleil montagneux.
